@@ -1,5 +1,6 @@
 Thingsboard:
-  host: "agrotechlab.lages.ifsc.edu.br"
+  # host: "agrotechlab.lages.ifsc.edu.br"
+  host: "191.36.42.244"
   port: 1883
 
 TTNv3:
@@ -8,7 +9,7 @@ TTNv3:
 
 Projects:
   - AMBEV
-  - CattleTracker
+  # - CattleTracker
 
 AMBEV:
   api_key_name: "agrotech4all-test@ttn"
