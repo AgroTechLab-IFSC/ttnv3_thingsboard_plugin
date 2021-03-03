@@ -16,16 +16,20 @@ class Project(threading.Thread):
         payload = "{"                
         payload += "\"f_port\":"+str(jsonObject["uplink_message"]["f_port"])
         payload += ", \"f_cnt\":"+str(jsonObject["uplink_message"]["f_cnt"])
-        telemetry = jsonObject["uplink_message"]["decoded_payload"]
-        for id in telemetry:
-            payload += ", \""+id+"\":"+str(jsonObject["uplink_message"]["decoded_payload"][id])
-        payload += ", \"data_rate_index\":"+str(jsonObject["uplink_message"]["settings"]["data_rate_index"])
+        if "decoded_payload" not in ["uplink_message"]:
+            print("\t\t\tDecoded payload not into received message!!!")
+            logging.warning("Decoded payload not into received message")
+        else:
+            telemetry = jsonObject["uplink_message"]["decoded_payload"]
+            for id in telemetry:
+                payload += ", \""+id+"\":"+str(jsonObject["uplink_message"]["decoded_payload"][id])
+        # payload += ", \"data_rate_index\":"+str(jsonObject["uplink_message"]["settings"]["data_rate_index"])
         payload += ", \"coding_rate\":\""+jsonObject["uplink_message"]["settings"]["coding_rate"]+"\""
         payload += ", \"frequency\":"+str(jsonObject["uplink_message"]["settings"]["frequency"])
         payload += ", \"lora_bandwidth\":"+str(jsonObject["uplink_message"]["settings"]["data_rate"]["lora"]["bandwidth"])
         payload += ", \"lora_spreading_factor\":"+str(jsonObject["uplink_message"]["settings"]["data_rate"]["lora"]["spreading_factor"])
         payload += "}"
-        print(payload)
+        # print(payload)
         return payload
 
     def on_connect(self, client, userdata, flags, rc):
@@ -79,9 +83,10 @@ class Project(threading.Thread):
     def on_message(self, client, userdata, msg):
         print("\t\t\tClient {:s} receive a message from topic {:s}".format(client._client_id.decode("utf-8"), msg.topic))
         logging.debug("Client %s receive a message from topic %s", client._client_id.decode("utf-8"), msg.topic)                
-        jsonData = msg.payload.decode("utf-8")
+        jsonData = msg.payload.decode("utf-8")        
         global jsonObj
-        jsonObj = json.loads(jsonData)    
+        jsonObj = json.loads(jsonData)
+        print(jsonObj)
         device_id = jsonObj["end_device_ids"]["device_id"]        
         thingsboard.username_pw_set(device_id+self.config.getAccessTokenComplement(userdata), "")          
         thingsboard.connect(self.config.getThingsboardHost(), self.config.getThingsboardPort())                                
@@ -111,7 +116,7 @@ class Project(threading.Thread):
         thingsboard.on_disconnect = self.on_disconnect
         thingsboard.on_publish = self.on_publish        
 
-        ttn.connect(self.config.getTTNHost(), self.config.getTTNPort())        
+        ttn.connect(host=self.config.getTTNHost(), port=self.config.getTTNPort(), keepalive=120)        
         while True:            
             # ttn.loop_read()
             # ttn.loop_write()

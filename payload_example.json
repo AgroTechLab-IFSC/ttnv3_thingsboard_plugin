@@ -103,3 +103,99 @@
 		"consumed_airtime":"0.205824s"
 	}
 }
+
+
+
+{
+	'end_device_ids': {
+		'device_id': 'ats02-dev0', 
+		'application_ids': {
+			'application_id': 'agrotech4all-test'
+			}, 
+			'dev_eui': '00DE745EAFBDE7FF', 
+			'dev_addr': '260B2B76'}, 
+			'correlation_ids': [
+				'as:up:01EZTQZ9SBGEJ52VCKNX6KDPH9', 
+				'gs:conn:01EZT9FMM3FTC3Z8ND23RWN6TE', 
+				'gs:up:host:01EZT9FMMD830YQDBETXJR56AH', 
+				'gs:uplink:01EZTQZ9FBJAX6Q307VJ76NAYZ', 
+				'ns:uplink:01EZTQZ9FJZ4KZP3C01VEMQ2XA', 
+				'rpc:/ttn.lorawan.v3.GsNs/HandleUplink:01EZTQZ9FJSJ65QEEH570JJGDN', 
+				'rpc:/ttn.lorawan.v3.NsAs/HandleUplink:01EZTQZ9SASFRRB3F60QEJWNFZ'
+				], 
+				'received_at': '2021-03-03T00:31:59.787660848Z', 
+				'uplink_message': {
+					'f_port': 10, 
+					'f_cnt': 856, 
+					'frm_payload': 'qgjLTpOZCUtPqgdwPkQGAIoGAes=', 
+					'rx_metadata': [
+						{
+							'gateway_ids': {
+								'gateway_id': 'ttn-lora-gw3-ifsc-lages', 
+								'eui': 'A840411D97AE4150'}, 
+								'time': '2021-03-03T00:31:59.344410Z', 
+								'timestamp': 2311195500, 
+								'rssi': -47, 
+								'channel_rssi': -47, 
+								'snr': 12.8, 
+								'location': {
+									'latitude': -27.800765130596908, 
+									'longitude': -50.307391583919525, 
+									'altitude': 920, 
+									'source': 'SOURCE_REGISTRY'
+									}, 
+									'uplink_token': 'CiUKIwoXdHRuLWxvcmEtZ3czLWlmc2MtbGFnZXMSCKhAQR2XrkFQEOyWiM4IGgwI/7H7gQYQ5Zrj3gEg4Lvy76G6Aw=='
+									}, 
+									{
+										'gateway_ids': {
+											'gateway_id': 'ttn-lora-gw4-ifsc-lages', 
+											'eui': 'A840411D98024150'
+										}, 
+										'time': '2021-03-03T00:31:59.349119Z', 
+										'timestamp': 2311931524, 
+										'rssi': -41, 
+										'channel_rssi': -41, 
+										'snr': 13, 
+										'location': {
+											'latitude': -27.804945596682987, 
+											'longitude': -50.337282121181495, 
+											'altitude': 956, 
+											'source': 'SOURCE_REGISTRY'
+											}, 
+											'uplink_token': 'CiUKIwoXdHRuLWxvcmEtZ3c0LWlmc2MtbGFnZXMSCKhAQR2YAkFQEISNtc4IGgwI/7H7gQYQneyb3wEgoOftzqS6Aw=='
+											}, 
+											{
+												'gateway_ids': {
+													'gateway_id': 'ttn-lora-gw5-ifsc-lages', 
+													'eui': 'A840411DABC04150'}, 
+													'time': '2021-03-03T00:31:59.354198Z', 
+													'timestamp': 2315486652, 
+													'rssi': -28, 
+													'channel_rssi': -28, 
+													'snr': 12, 
+													'location': {
+														'latitude': -27.820199848953248, 
+														'longitude': -50.31641453504563, 
+														'altitude': 900, 
+														'source': 'SOURCE_REGISTRY'
+														}, 
+														'uplink_token': 'CiUKIwoXdHRuLWxvcmEtZ3c1LWlmc2MtbGFnZXMSCKhAQR2rwEFQELyLjtAIGgwI/7H7gQYQ8r+Q4AEg4MyJ7rG6Aw=='
+														}
+														], 
+														'settings': {
+															'data_rate': {
+																'lora': {
+																	'bandwidth': 125000, 
+																	'spreading_factor': 9
+																}
+															}, 
+															'data_rate_index': 1, 
+															'coding_rate': '4/5', 
+															'frequency': '916800000', 
+															'timestamp': 2311195500, 
+															'time': '2021-03-03T00:31:59.344410Z'
+														}, 
+														'received_at': '2021-03-03T00:31:59.475097304Z', 
+														'consumed_airtime': '0.246784s'
+													}
+												}
