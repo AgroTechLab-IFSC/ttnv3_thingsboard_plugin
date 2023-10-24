@@ -14,9 +14,9 @@ Projects:
 AMBEV:
   api_key_name: "agrotech4all-test@ttn"
   api_key_id: "NNSXS.7TUU3UTXJI3BZNGZYFIAYMZQM53XLPVXX4MHXEY.NTA4GZJGKMFPKKX2O4I4BXJIJ2JPGBFOQGILF3T4HVJ2JJOF2TBA"
-  acess_token_complement: "ifsclages"
+  acess_token_complement: "xxxxxx"
 
 CattleTracker:
   api_key_name: "cattletracker-test@ttn"
   api_key_id: "NNSXS.2KPCRVSOQDIQKYSGFMAWIOMSHJKDIFM5XRASGWQ.TODLN6KZ66VP6THX3DCR6UBRXCNZ7JTZEKZGAQ7BSHRXD2UUPVNQ"
-  acess_token_complement: "ifsclages"
+  acess_token_complement: "xxxxxx"
