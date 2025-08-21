@@ -2,6 +2,7 @@ import threading
 import logging
 import time
 import paho.mqtt.client as mqtt
+import ssl
 import json
 
 
@@ -32,8 +33,8 @@ class Project(threading.Thread):
         # print(payload)
         return payload
 
-    def on_connect(self, client, userdata, flags, rc):
-        if (rc == mqtt.CONNACK_ACCEPTED):
+    def on_connect(self, client, userdata, flags, reason_code, properties):
+        if (reason_code == mqtt.CONNACK_ACCEPTED):
             print("\t\t\tClient {:s} connected with success!!!".format(client._client_id.decode("utf-8")))
             logging.debug("Client %s connected with success!!!", client._client_id.decode("utf-8"))
             if "TTN" in client._client_id.decode("utf-8"):
@@ -41,27 +42,27 @@ class Project(threading.Thread):
                 client.subscribe(sub)
             if "Thingsboard" in client._client_id.decode("utf-8"):
                 thingsboard.publish("v1/devices/me/telemetry", payload=self.processPayload(jsonObj))
-        elif (rc == mqtt.CONNACK_REFUSED_PROTOCOL_VERSION):
+        elif (reason_code == mqtt.CONNACK_REFUSED_PROTOCOL_VERSION):
             print("\t\t\tClient {:s} connection refused - incorrect protocol version!!!".format(client._client_id.decode("utf-8")))
             logging.error("Client %s connection refused - incorrect protocol version!!!", client._client_id.decode("utf-8"))
-        elif (rc == mqtt.CONNACK_REFUSED_IDENTIFIER_REJECTED):
+        elif (reason_code == mqtt.CONNACK_REFUSED_IDENTIFIER_REJECTED):
             print("\t\t\tClient {:s} connection refused - invalid client identifier!!!".format(client._client_id.decode("utf-8")))
             logging.error("Client %s connection refused - invalid client identifier!!!", client._client_id.decode("utf-8"))
-        elif (rc == mqtt.CONNACK_REFUSED_SERVER_UNAVAILABLE):
+        elif (reason_code == mqtt.CONNACK_REFUSED_SERVER_UNAVAILABLE):
             print("\t\t\tClient {:s} connection refused - server unavailable!!!".format(client._client_id.decode("utf-8")))
             logging.error("Client %s connection refused - server unavailable!!!", client._client_id.decode("utf-8"))
-        elif (rc == mqtt.CONNACK_REFUSED_BAD_USERNAME_PASSWORD):
+        elif (reason_code == mqtt.CONNACK_REFUSED_BAD_USERNAME_PASSWORD):
             print("\t\t\tClient {:s} connection refused - bad username or password!!!".format(client._client_id.decode("utf-8")))
             logging.error("Client %s connection refused - bad username or password!!!", client._client_id.decode("utf-8"))
-        elif (rc == mqtt.CONNACK_REFUSED_NOT_AUTHORIZED):
+        elif (reason_code == mqtt.CONNACK_REFUSED_NOT_AUTHORIZED):
             print("\t\t\tClient {:s} connection refused - not authorized!!!".format(client._client_id.decode("utf-8")))
             logging.error("Client %s connection refused - not authorized!!!", client._client_id.decode("utf-8"))
         else:
             print("\t\t\tClient {:s} connection refused - unknown error!!!".format(client._client_id.decode("utf-8")))
             logging.error("Client %s connection refused - unknown error!!!", client._client_id.decode("utf-8"))
 
-    def on_disconnect(self, client, userdata, rc):
-        if (rc == mqtt.MQTT_ERR_SUCCESS):
+    def on_disconnect(self, client, userdata, flags, reason_code, properties):
+        if (reason_code == mqtt.MQTT_ERR_SUCCESS):
             print("\t\t\tClient {:s} successful disconnect from MQTT broker".format(client._client_id.decode("utf-8")))
             logging.debug("Client %s successful disconnect from MQTT broker", client._client_id.decode("utf-8"))
         else:
@@ -70,11 +71,15 @@ class Project(threading.Thread):
             if "TTN" in client._client_id.decode("utf-8"):
                 ttn.connect(self.config.getTTNHost(), self.config.getTTNPort())                
 
-    def on_subscribe(self, client, userdata, mid, granted_qos):
+    def on_subscribe(self, client, userdata, mid, reason_codes, properties):
         print("\t\t\tClient {:s} uplink subscribed!!!".format(client._client_id.decode("utf-8")))
         logging.debug("Client %s uplink subscribed", client._client_id.decode("utf-8"))
 
-    def on_publish(self, client, userdata, mid):
+    def on_unsubscribe(self, client, userdata, mid, reason_codes, properties):
+        print("\t\t\tClient {:s} uplink unsubscribed!!!".format(client._client_id.decode("utf-8")))
+        logging.debug("Client %s uplink unsubscribed", client._client_id.decode("utf-8"))
+
+    def on_publish(self, client, userdata, mid, reason_codes, properties):
         print("\t\t\tClient {:s} publish a message".format(client._client_id.decode("utf-8")))
         logging.debug("Client %s publish a message", client._client_id.decode("utf-8"))
         if "Thingsboard" in client._client_id.decode("utf-8"):
@@ -99,33 +104,31 @@ class Project(threading.Thread):
         logging.debug("Creating TTN client to project {}".format(self.name))
         print("\t\t\tCreating TTN client to project "+self.name)
         global ttn
-        ttn = mqtt.Client(self.name+"-TTN")        
+        ttn = mqtt.Client(client_id=self.name+"-TTN", callback_api_version=mqtt.CallbackAPIVersion.VERSION2, protocol=mqtt.MQTTv311)
         ttn.username_pw_set(self.config.getAPIKeyName(self.name), self.config.getAPIKeyID(self.name))
         ttn.user_data_set(self.name)
         ttn.on_connect = self.on_connect
         ttn.on_disconnect = self.on_disconnect
         ttn.on_subscribe = self.on_subscribe
         ttn.on_message = self.on_message
-
+        ttn.tls_set(ca_certs=None, tls_version=ssl.PROTOCOL_TLS)
         
         logging.debug("Creating Thingsboard client to project {}".format(self.name))
         print("\t\t\tCreating Thingsboard client to project "+self.name)
         global thingsboard
-        thingsboard = mqtt.Client(self.name+"-Thingsboard")                
+        thingsboard = mqtt.Client(client_id=self.name+"-Thingsboard", callback_api_version=mqtt.CallbackAPIVersion.VERSION2)                
         thingsboard.on_connect = self.on_connect
         thingsboard.on_disconnect = self.on_disconnect
         thingsboard.on_publish = self.on_publish        
 
-        ttn.connect(host=self.config.getTTNHost(), port=self.config.getTTNPort(), keepalive=120)        
-        while True:            
-            # ttn.loop_read()
-            # ttn.loop_write()
-            # ttn.loop_misc()            
+        ttn.connect(host=self.config.getTTNHost(), port=self.config.getTTNPort(), keepalive=120)       
+        while True:
+            ttn.loop_read()
+            ttn.loop_write()
+            ttn.loop_misc()            
             # thingsboard.loop_read()
             # thingsboard.loop_write()
             # thingsboard.loop_misc()
-            ttn.loop()
-            thingsboard.loop()
             # time.sleep(1)
     
     

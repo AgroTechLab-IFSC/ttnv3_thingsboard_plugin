@@ -4,8 +4,8 @@ Thingsboard:
   port: 1883
 
 TTNv3:
-  host: "eu1.cloud.thethings.network"
-  port: 1883
+  host: "nam1.cloud.thethings.network"
+  port: 8883
 
 Projects:
   - Semasa-Test
