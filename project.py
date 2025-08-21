@@ -17,7 +17,7 @@ class Project(threading.Thread):
         payload = "{"                
         payload += "\"f_port\":"+str(jsonObject["uplink_message"]["f_port"])
         payload += ", \"f_cnt\":"+str(jsonObject["uplink_message"]["f_cnt"])
-        if "decoded_payload" not in ["uplink_message"]:
+        if "decoded_payload" not in jsonObject["uplink_message"]:
             print("\t\t\tDecoded payload not into received message!!!")
             logging.warning("Decoded payload not into received message")
         else:
@@ -25,10 +25,11 @@ class Project(threading.Thread):
             for id in telemetry:
                 payload += ", \""+id+"\":"+str(jsonObject["uplink_message"]["decoded_payload"][id])
         # payload += ", \"data_rate_index\":"+str(jsonObject["uplink_message"]["settings"]["data_rate_index"])
-        payload += ", \"coding_rate\":\""+jsonObject["uplink_message"]["settings"]["coding_rate"]+"\""
+        # payload += ", \"coding_rate\":\""+jsonObject["uplink_message"]["settings"]["coding_rate"]+"\""
         payload += ", \"frequency\":"+str(jsonObject["uplink_message"]["settings"]["frequency"])
         payload += ", \"lora_bandwidth\":"+str(jsonObject["uplink_message"]["settings"]["data_rate"]["lora"]["bandwidth"])
         payload += ", \"lora_spreading_factor\":"+str(jsonObject["uplink_message"]["settings"]["data_rate"]["lora"]["spreading_factor"])
+        payload += ", \"lora_coding_rate\":\""+str(jsonObject["uplink_message"]["settings"]["data_rate"]["lora"]["coding_rate"]+"\"")
         payload += "}"
         # print(payload)
         return payload
@@ -41,7 +42,8 @@ class Project(threading.Thread):
                 sub = "v3/"+client._username.decode("utf-8")+"/devices/+/up"            
                 client.subscribe(sub)
             if "Thingsboard" in client._client_id.decode("utf-8"):
-                thingsboard.publish("v1/devices/me/telemetry", payload=self.processPayload(jsonObj))
+                if (jsonObj["uplink_message"]["f_port"] == 2):
+                    thingsboard.publish("v1/devices/me/telemetry", payload=self.processPayload(jsonObj))
         elif (reason_code == mqtt.CONNACK_REFUSED_PROTOCOL_VERSION):
             print("\t\t\tClient {:s} connection refused - incorrect protocol version!!!".format(client._client_id.decode("utf-8")))
             logging.error("Client %s connection refused - incorrect protocol version!!!", client._client_id.decode("utf-8"))
@@ -86,14 +88,13 @@ class Project(threading.Thread):
                 thingsboard.disconnect()
 
     def on_message(self, client, userdata, msg):
-        print("\t\t\tClient {:s} receive a message from topic {:s}".format(client._client_id.decode("utf-8"), msg.topic))
-        logging.debug("Client %s receive a message from topic %s", client._client_id.decode("utf-8"), msg.topic)                
+        print("\t\t\tClient {:s} received a message from topic {:s}".format(client._client_id.decode("utf-8"), msg.topic))
+        logging.debug("Client %s received a message from topic %s", client._client_id.decode("utf-8"), msg.topic)                
         jsonData = msg.payload.decode("utf-8")        
         global jsonObj
         jsonObj = json.loads(jsonData)
-        print(jsonObj)
-        device_id = jsonObj["end_device_ids"]["device_id"]        
-        thingsboard.username_pw_set(device_id+self.config.getAccessTokenComplement(userdata), "")          
+        device_id = jsonObj["end_device_ids"]["device_id"]
+        thingsboard.username_pw_set(username=device_id+self.config.getAccessTokenComplement(userdata))          
         thingsboard.connect(self.config.getThingsboardHost(), self.config.getThingsboardPort())                                
         
     def run(self):
@@ -110,6 +111,8 @@ class Project(threading.Thread):
         ttn.on_connect = self.on_connect
         ttn.on_disconnect = self.on_disconnect
         ttn.on_subscribe = self.on_subscribe
+        ttn.on_unsubscribe = self.on_unsubscribe
+        ttn.on_publish = self.on_publish
         ttn.on_message = self.on_message
         ttn.tls_set(ca_certs=None, tls_version=ssl.PROTOCOL_TLS)
         
@@ -126,9 +129,9 @@ class Project(threading.Thread):
             ttn.loop_read()
             ttn.loop_write()
             ttn.loop_misc()            
-            # thingsboard.loop_read()
-            # thingsboard.loop_write()
-            # thingsboard.loop_misc()
+            thingsboard.loop_read()
+            thingsboard.loop_write()
+            thingsboard.loop_misc()
             # time.sleep(1)
     
     

@@ -46,4 +46,4 @@ class Config:
         return self.tree["Thingsboard"]["port"]
     
     def getAccessTokenComplement(self, _projectName):
-        return self.tree[_projectName]["acess_token_complement"]
+        return self.tree[_projectName]["access_token_complement"]
