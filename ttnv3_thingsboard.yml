@@ -9,14 +9,8 @@ TTNv3:
 
 Projects:
   - Semasa-Test
-  # - CattleTracker
-
+ 
 Semasa-Test:
   api_key_name: "controlle-semasa-test@ttn"
-  api_key_id: "NNSXS.QXGKE5NFFTUHBHLHEIT6JFYTBCW7VHKSWK2WKMI.WMYCOCLMAAWPFQJFVHDOUTXNIK44PASIICKBOEMUA6MC22ZOT24Q"
-  acess_token_complement: "xxxxxx"
-
-CattleTracker:
-  api_key_name: "cattletracker-test@ttn"
-  api_key_id: "NNSXS.2KPCRVSOQDIQKYSGFMAWIOMSHJKDIFM5XRASGWQ.TODLN6KZ66VP6THX3DCR6UBRXCNZ7JTZEKZGAQ7BSHRXD2UUPVNQ"
+  api_key_id: ""
   acess_token_complement: "xxxxxx"
