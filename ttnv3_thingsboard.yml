@@ -8,12 +8,12 @@ TTNv3:
   port: 1883
 
 Projects:
-  - AMBEV
+  - Semasa-Test
   # - CattleTracker
 
-AMBEV:
-  api_key_name: "agrotech4all-test@ttn"
-  api_key_id: "NNSXS.7TUU3UTXJI3BZNGZYFIAYMZQM53XLPVXX4MHXEY.NTA4GZJGKMFPKKX2O4I4BXJIJ2JPGBFOQGILF3T4HVJ2JJOF2TBA"
+Semasa-Test:
+  api_key_name: "controlle-semasa-test@ttn"
+  api_key_id: "NNSXS.QXGKE5NFFTUHBHLHEIT6JFYTBCW7VHKSWK2WKMI.WMYCOCLMAAWPFQJFVHDOUTXNIK44PASIICKBOEMUA6MC22ZOT24Q"
   acess_token_complement: "xxxxxx"
 
 CattleTracker:
