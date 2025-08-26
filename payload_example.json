@@ -1,207 +1,92 @@
 {
-  "name": "as.up.data.forward",
-  "time": "2025-08-21T20:35:41.013852669Z",
-  "identifiers": [
-    {
-      "device_ids": {
-        "device_id": "ruc50l-ac1f09fffe1a83ba",
-        "application_ids": {
-          "application_id": "controlle-semasa-test"
-        },
-        "dev_eui": "AC1F09FFFE1A83BA",
-        "join_eui": "AC1F09FFF9153272",
-        "dev_addr": "260C7EF8"
-      }
-    }
-  ],
-  "data": {
-    "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
-    "end_device_ids": {
-      "device_id": "ruc50l-ac1f09fffe1a83ba",
-      "application_ids": {
-        "application_id": "controlle-semasa-test"
-      },
-      "dev_eui": "AC1F09FFFE1A83BA",
-      "join_eui": "AC1F09FFF9153272",
-      "dev_addr": "260C7EF8"
+  "end_device_ids":{
+    "device_id":"ruc50l-ac1f09fffe1a83ba",
+    "application_ids":{
+      "application_id":"controlle-semasa-test"
     },
-    "correlation_ids": [
-      "gs:uplink:01K375GA3XFHAJ433Y12QRWRV2"
-    ],
-    "received_at": "2025-08-21T20:35:41.010401499Z",
-    "uplink_message": {
-      "session_key_id": "AZjOVYnT5BDlM72DrLeyDA==",
-      "f_port": 1,
-      "f_cnt": 1,
-      "frm_payload": "AAEA",
-      "decoded_payload": {
-        "fw_version": "0.1.0"
-      },
-      "rx_metadata": [
-        {
-          "gateway_ids": {
-            "gateway_id": "gw3-lora-uniplac",
-            "eui": "F8033202B1E90000"
-          },
-          "timestamp": 778070636,
-          "rssi": -117,
-          "channel_rssi": -117,
-          "snr": -11,
-          "location": {
-            "latitude": -27.79264780052,
-            "longitude": -50.302548423696,
-            "altitude": 893,
-            "source": "SOURCE_REGISTRY"
-          },
-          "uplink_token": "Ch4KHAoQZ3czLWxvcmEtdW5pcGxhYxII+AMyArHpAAAQ7NSB8wIaDAichp7FBhCbqPD6AiDg6/7E0o8s",
-          "channel_index": 2,
-          "received_at": "2025-08-21T20:35:40.794563611Z"
-        },
-        {
-          "gateway_ids": {
-            "gateway_id": "gw8-lora-agrotechlab-lages-ifsc",
-            "eui": "A840412192C04150"
-          },
-          "time": "2025-08-21T20:35:40.486880064Z",
-          "timestamp": 705099796,
-          "snr": 7.5,
-          "uplink_token": "Ci0KKwofZ3c4LWxvcmEtYWdyb3RlY2hsYWItbGFnZXMtaWZzYxIIqEBBIZLAQVAQlPCb0AIaDAichp7FBhD/gaOCAyCgnOTZwt4R",
-          "received_at": "2025-08-21T20:35:40.712928510Z"
-        },
-        {
-          "gateway_ids": {
-            "gateway_id": "gw4-lora-agrotechlab-lages-ifsc",
-            "eui": "A840411D98004150"
-          },
-          "time": "2012-01-01T03:15:23.599280Z",
-          "timestamp": 897616716,
-          "rssi": -108,
-          "channel_rssi": -108,
-          "snr": 0.5,
-          "location": {
-            "latitude": -27.805154,
-            "longitude": -50.337277,
-            "altitude": 962,
-            "source": "SOURCE_REGISTRY"
-          },
-          "uplink_token": "Ci0KKwofZ3c0LWxvcmEtYWdyb3RlY2hsYWItbGFnZXMtaWZzYxIIqEBBHZgAQVAQzJaCrAMaDAichp7FBhCDp/6AAyDgwYDxjxo=",
-          "channel_index": 2,
-          "received_at": "2025-08-21T20:35:40.807375747Z"
-        }
-      ],
-      "settings": {
-        "data_rate": {
-          "lora": {
-            "bandwidth": 125000,
-            "spreading_factor": 10,
-            "coding_rate": "4/5"
-          }
-        },
-        "frequency": "917200000",
-        "timestamp": 778070636
-      },
-      "received_at": "2025-08-21T20:35:40.798430279Z",
-      "confirmed": true,
-      "consumed_airtime": "0.329728s",
-      "locations": {
-        "user": {
-          "latitude": -27.801771855864473,
-          "longitude": -50.33699244260789,
-          "altitude": 923,
-          "source": "SOURCE_REGISTRY"
-        }
-      },
-      "network_ids": {
-        "net_id": "000013",
-        "ns_id": "EC656E0000000182",
-        "tenant_id": "ttn",
-        "cluster_id": "nam1",
-        "cluster_address": "nam1.cloud.thethings.network"
-      }
-    }
+    "dev_eui":"AC1F09FFFE1A83BA",
+    "join_eui":"AC1F09FFF9153272",
+    "dev_addr":"260C6CA3"
   },
-  "correlation_ids": [
-    "gs:uplink:01K375GA3XFHAJ433Y12QRWRV2"
-  ],
-  "origin": "ip-10-101-15-191.us-west-1.compute.internal",
-  "context": {
-    "tenant-id": "CgN0dG4="
-  },
-  "visibility": {
-    "rights": [
-      "RIGHT_APPLICATION_TRAFFIC_READ"
-    ]
-  },
-  "unique_id": "01K375GAANJ1YWYEW5PJK524TH"
+  "correlation_ids":["gs:uplink:01K3KP4K7ZRG6ZJ41DQNRSSJPC"],
+  "received_at":"2025-08-26T17:17:17.739787961Z",
+  "join_accept":{
+    "session_key_id":"AZjnYk0GESEh96HE156iAg==",
+    "received_at":"2025-08-26T17:17:15.903962663Z"
+  }
 }
 
-
-
-
 {
-	'end_device_ids': {
-		'device_id': 'ruc50l-ac1f09fffe1a83ba', 
-		'application_ids': {
-			'application_id': 'controlle-semasa-test'
-		}, 
-		'dev_eui': 'AC1F09FFFE1A83BA', 
-		'join_eui': 'AC1F09FFF9153272', 
-		'dev_addr': '260C7EF8'
-	}, 
-	'correlation_ids': [
-		'gs:uplink:01K375MNTASA3A5ZHC8RVJAYG3'
-	], 
-	'received_at': '2025-08-21T20:38:04.056767227Z', 
-	'uplink_message': {
-		'session_key_id': 'AZjOVYnT5BDlM72DrLeyDA==', 
-		'f_port': 1, 
-		'f_cnt': 2, 
-		'frm_payload': 'AAEA', 
-		'decoded_payload': {
-			'fw_version': '0.1.0'
-		}, 
-		'rx_metadata': [
-			{
-				'gateway_ids': {
-					'gateway_id': 'gw8-lora-agrotechlab-lages-ifsc', 
-					'eui': 'A840412192C04150'
-				}, 
-				'time': '2025-08-21T20:38:03.526489019Z', 
-				'timestamp': 848148908, 
-				'snr': 10.25, 
-				'uplink_token': 'Ci0KKwofZ3c4LWxvcmEtYWdyb3RlY2hsYWItbGFnZXMtaWZzYxIIqEBBIZLAQVAQrPO2lAMaDAirh57FBhCGiZ6VAyDgj/XM1+IR', 
-				'received_at': '2025-08-21T20:38:03.752701691Z'
-			}
-		], 
-		'settings': {
-			'data_rate': {
-				'lora': {
-					'bandwidth': 125000, 
-					'spreading_factor': 8, 
-					'coding_rate': '4/5'
-				}
-			}, 
-			'frequency': '918200000', 
-			'timestamp': 848148908, 
-			'time': '2025-08-21T20:38:03.526489019Z'
-		}, 
-		'received_at': '2025-08-21T20:38:03.851316888Z', 
-		'confirmed': True, 
-		'consumed_airtime': '0.102912s', 
-		'locations': {
-			'user': {
-				'latitude': -27.801771855864473, 
-				'longitude': -50.33699244260789, 
-				'altitude': 923, 
-				'source': 'SOURCE_REGISTRY'
-			}
-		}, 
-		'network_ids': {
-			'net_id': '000013', 
-			'ns_id': 'EC656E0000000182', 
-			'tenant_id': 'ttn', 
-			'cluster_id': 'nam1', 
-			'cluster_address': 'nam1.cloud.thethings.network'
-		}
-	}
+  "end_device_ids":{
+    "device_id":"ruc50l-ac1f09fffe1a83ba",
+    "application_ids":{
+      "application_id":"controlle-semasa-test"
+    },
+    "dev_eui":"AC1F09FFFE1A83BA",
+    "join_eui":"AC1F09FFF9153272",
+    "dev_addr":"260C6B5A"
+  },
+  "correlation_ids":["gs:uplink:01K3KPM3FPVQKY0TFCAVG4T0JK"],
+  "received_at":"2025-08-26T17:25:44.266571991Z",
+  "uplink_message":{
+    "session_key_id":"AZjnaQd/GYTp9eyW5ldMTw==",
+    "f_port":1,
+    "f_cnt":1,
+    "frm_payload":"AAABAA==",
+    "decoded_payload":{
+      "current_fw_title":"RUC50L",
+      "current_fw_version":"0.1.0"
+    },
+    "rx_metadata":[
+      {
+        "gateway_ids":{
+          "gateway_id":"gw8-lora-agrotechlab-lages-ifsc",
+          "eui":"A840412192C04150"
+        },
+        "time":"2025-08-26T17:25:43.736407041Z",
+        "timestamp":1572158180,
+        "rssi":-10,
+        "channel_rssi":-10,
+        "snr":10,
+        "location":{
+          "latitude":-27.81984950559326,
+          "longitude":-50.316532552242286,
+          "altitude":884,
+          "source":"SOURCE_REGISTRY"
+        },
+        "uplink_token":"Ci0KKwofZ3c4LWxvcmEtYWdyb3RlY2hsYWItbGFnZXMtaWZzYxIIqEBBIZLAQVAQ5PXU7QUaCwiY3LfFBhCh1tYZIKCVuN/g/Q8=",
+        "received_at":"2025-08-26T17:25:43.955826462Z"
+      }
+    ],
+    "settings":{
+      "data_rate":{
+        "lora":{
+          "bandwidth":125000,
+          "spreading_factor":10,
+          "coding_rate":"4/5"
+        }
+      },
+      "frequency":"917000000",
+      "timestamp":1572158180,
+      "time":"2025-08-26T17:25:43.736407041Z"
+    },
+    "received_at":"2025-08-26T17:25:44.054807105Z",
+    "confirmed":true,
+    "consumed_airtime":"0.329728s",
+    "locations":{
+      "user":{
+        "latitude":-27.801771855864473,
+        "longitude":-50.33699244260789,
+        "altitude":923,
+        "source":"SOURCE_REGISTRY"
+      }
+    },
+    "network_ids":{
+      "net_id":"000013",
+      "ns_id":"EC656E0000000182",
+      "tenant_id":"ttn",
+      "cluster_id":"nam1",
+      "cluster_address":"nam1.cloud.thethings.network"
+    }
+  }
 }
